@@ -3,6 +3,14 @@
          xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
+         backupGlobals="false"
+         backupStaticAttributes="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnError="true"
+         stopOnFailure="true"
+
 >
     <testsuites>
         <testsuite name="Unit">
@@ -11,12 +19,37 @@
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
+
+        <testsuite name="Core">
+            <directory suffix="Test.php">./Modules/Core/Tests/Feature</directory>
+            <directory suffix="Test.php">./Modules/Core/Tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="Jav">
+            <directory suffix="Test.php">./Modules/Core/Tests/Feature</directory>
+            <directory suffix="Test.php">./Modules/Core/Tests/Unit</directory>
+        </testsuite>
     </testsuites>
-    <coverage processUncoveredFiles="true">
+
+    <coverage processUncoveredFiles="false">
         <include>
             <directory suffix=".php">./app</directory>
+            <directory suffix=".php">./Modules</directory>
         </include>
+        <exclude>
+            <directory suffix=".php">./Modules/Jav/Tests</directory>
+            <directory suffix=".php">./Modules/Jav/Models</directory>
+            <directory suffix=".php">./Modules/Jav/Database</directory>
+        </exclude>
+        <report>
+            <clover outputFile="./coverage.xml"/>
+        </report>
     </coverage>
+
+    <logging>
+        <teamcity outputFile="teamcity.txt"/>
+        <text outputFile="logfile.txt"/>
+    </logging>
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="BCRYPT_ROUNDS" value="4"/>

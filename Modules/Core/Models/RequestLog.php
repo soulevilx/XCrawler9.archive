@@ -15,13 +15,13 @@ class RequestLog extends \Jenssegers\Mongodb\Eloquent\Model
         'url',
         'payload',
         'code',
-        'response'
+        'response',
     ];
 
     protected $casts = [
         'url' => 'string',
         'payload' => 'array',
         'code' => 'integer',
-        'response' => 'string'
+        'response' => 'string',
     ];
 }

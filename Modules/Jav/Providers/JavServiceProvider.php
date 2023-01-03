@@ -2,8 +2,10 @@
 
 namespace Modules\Jav\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\ServiceProvider;
+use Modules\Jav\Console\Commands\OnejavAll;
+use Modules\Jav\Console\Commands\OnejavDaily;
 
 class JavServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,10 @@ class JavServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->commands([
+            OnejavAll::class,
+            OnejavDaily::class
+        ]);
     }
 
     /**

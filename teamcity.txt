@@ -1,0 +1,74 @@
+
+##teamcity[testCount count='11' flowId='79213']
+
+##teamcity[testSuiteStarted name='/Users/vietvu/Sites/XCrawler/Modules' flowId='79213']
+
+##teamcity[testSuiteStarted name='Modules\Core\Tests\Unit\Services\CrawlerServiceTest' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Core/Tests/Unit/Services/CrawlerServiceTest.php::\Modules\Core\Tests\Unit\Services\CrawlerServiceTest' flowId='79213']
+
+##teamcity[testStarted name='testCrawlGetSuccess' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Core/Tests/Unit/Services/CrawlerServiceTest.php::\Modules\Core\Tests\Unit\Services\CrawlerServiceTest::testCrawlGetSuccess' flowId='79213']
+
+##teamcity[testFinished name='testCrawlGetSuccess' duration='382' flowId='79213']
+
+##teamcity[testStarted name='testCrawlGetFailed' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Core/Tests/Unit/Services/CrawlerServiceTest.php::\Modules\Core\Tests\Unit\Services\CrawlerServiceTest::testCrawlGetFailed' flowId='79213']
+
+##teamcity[testFinished name='testCrawlGetFailed' duration='156' flowId='79213']
+
+##teamcity[testSuiteFinished name='Modules\Core\Tests\Unit\Services\CrawlerServiceTest' flowId='79213']
+
+##teamcity[testSuiteStarted name='Modules\Core\Tests\Unit\Services\SettingServiceTest' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Core/Tests/Unit/Services/SettingServiceTest.php::\Modules\Core\Tests\Unit\Services\SettingServiceTest' flowId='79213']
+
+##teamcity[testStarted name='testRemember' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Core/Tests/Unit/Services/SettingServiceTest.php::\Modules\Core\Tests\Unit\Services\SettingServiceTest::testRemember' flowId='79213']
+
+##teamcity[testFinished name='testRemember' duration='149' flowId='79213']
+
+##teamcity[testStarted name='testForget' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Core/Tests/Unit/Services/SettingServiceTest.php::\Modules\Core\Tests\Unit\Services\SettingServiceTest::testForget' flowId='79213']
+
+##teamcity[testFinished name='testForget' duration='145' flowId='79213']
+
+##teamcity[testSuiteFinished name='Modules\Core\Tests\Unit\Services\SettingServiceTest' flowId='79213']
+
+##teamcity[testSuiteStarted name='Modules\Jav\Tests\Feature\Commands\OnejavAllTest' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Jav/Tests/Feature/Commands/OnejavAllTest.php::\Modules\Jav\Tests\Feature\Commands\OnejavAllTest' flowId='79213']
+
+##teamcity[testStarted name='testHandle' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Jav/Tests/Feature/Commands/OnejavAllTest.php::\Modules\Jav\Tests\Feature\Commands\OnejavAllTest::testHandle' flowId='79213']
+
+##teamcity[testFinished name='testHandle' duration='144' flowId='79213']
+
+##teamcity[testSuiteFinished name='Modules\Jav\Tests\Feature\Commands\OnejavAllTest' flowId='79213']
+
+##teamcity[testSuiteStarted name='Modules\Jav\Tests\Feature\Commands\OnejavDailyTest' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Jav/Tests/Feature/Commands/OnejavDailyTest.php::\Modules\Jav\Tests\Feature\Commands\OnejavDailyTest' flowId='79213']
+
+##teamcity[testStarted name='testHandle' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Jav/Tests/Feature/Commands/OnejavDailyTest.php::\Modules\Jav\Tests\Feature\Commands\OnejavDailyTest::testHandle' flowId='79213']
+
+##teamcity[testFinished name='testHandle' duration='141' flowId='79213']
+
+##teamcity[testSuiteFinished name='Modules\Jav\Tests\Feature\Commands\OnejavDailyTest' flowId='79213']
+
+##teamcity[testSuiteStarted name='Modules\Jav\Tests\Unit\Crawlers\OnejavCrawlerTest' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Jav/Tests/Unit/Crawlers/OnejavCrawlerTest.php::\Modules\Jav\Tests\Unit\Crawlers\OnejavCrawlerTest' flowId='79213']
+
+##teamcity[testStarted name='testGetItems' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Jav/Tests/Unit/Crawlers/OnejavCrawlerTest.php::\Modules\Jav\Tests\Unit\Crawlers\OnejavCrawlerTest::testGetItems' flowId='79213']
+
+##teamcity[testFinished name='testGetItems' duration='165' flowId='79213']
+
+##teamcity[testStarted name='testGetItemsFailed' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Jav/Tests/Unit/Crawlers/OnejavCrawlerTest.php::\Modules\Jav\Tests\Unit\Crawlers\OnejavCrawlerTest::testGetItemsFailed' flowId='79213']
+
+##teamcity[testFinished name='testGetItemsFailed' duration='146' flowId='79213']
+
+##teamcity[testStarted name='testGetDaily' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Jav/Tests/Unit/Crawlers/OnejavCrawlerTest.php::\Modules\Jav\Tests\Unit\Crawlers\OnejavCrawlerTest::testGetDaily' flowId='79213']
+
+##teamcity[testFinished name='testGetDaily' duration='2251' flowId='79213']
+
+##teamcity[testSuiteFinished name='Modules\Jav\Tests\Unit\Crawlers\OnejavCrawlerTest' flowId='79213']
+
+##teamcity[testSuiteStarted name='Modules\Jav\Tests\Unit\Services\OnejavServiceTest' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Jav/Tests/Unit/Services/OnejavServiceTest.php::\Modules\Jav\Tests\Unit\Services\OnejavServiceTest' flowId='79213']
+
+##teamcity[testStarted name='testAll' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Jav/Tests/Unit/Services/OnejavServiceTest.php::\Modules\Jav\Tests\Unit\Services\OnejavServiceTest::testAll' flowId='79213']
+
+##teamcity[testFinished name='testAll' duration='356' flowId='79213']
+
+##teamcity[testStarted name='testDaily' locationHint='php_qn:///Users/vietvu/Sites/XCrawler/Modules/Jav/Tests/Unit/Services/OnejavServiceTest.php::\Modules\Jav\Tests\Unit\Services\OnejavServiceTest::testDaily' flowId='79213']
+
+##teamcity[testFinished name='testDaily' duration='2427' flowId='79213']
+
+##teamcity[testSuiteFinished name='Modules\Jav\Tests\Unit\Services\OnejavServiceTest' flowId='79213']
+
+##teamcity[testSuiteFinished name='/Users/vietvu/Sites/XCrawler/Modules' flowId='79213']
