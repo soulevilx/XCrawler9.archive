@@ -35,7 +35,7 @@ class OnejavServiceTest extends TestCase
         $setting = app(SettingService::class);
         Setting::where('group', 'onejav')->delete();
         $setting->remember('onejav', 'pages', fn() => 10703);
-        $setting->remember('onejav', 'current_pages', fn() => 10703);
+        $setting->remember('onejav', 'current_page', fn() => 10703);
 
         $items = $service->all();
 
