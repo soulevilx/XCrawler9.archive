@@ -24,8 +24,9 @@ class Onejav extends Model
     protected $casts = [
         'url' => 'string',
         'cover' => 'string',
-        'dvd_id' => 'float',
-        'date' => 'date',
+        'dvd_id' => 'string',
+        'size' => 'float',
+        'date' => 'date:Y-m-d',
         'genres' => 'array',
         'performers' => 'array',
         'description' => 'string',

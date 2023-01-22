@@ -11,7 +11,7 @@ class OnejavCrawlingSubscriber
     public function onOnejavItemParsed(OnejavItemParsed $event)
     {
         $repository = app(OnejavRepository::class);
-        $repository->create($event->item->getArrayCopy());
+        $repository->create($event->model->toArray());
     }
 
     /**

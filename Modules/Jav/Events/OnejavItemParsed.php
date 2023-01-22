@@ -3,6 +3,7 @@
 namespace Modules\Jav\Events;
 
 use Illuminate\Queue\SerializesModels;
+use Modules\Jav\Models\Onejav;
 
 class OnejavItemParsed
 {
@@ -13,7 +14,7 @@ class OnejavItemParsed
      *
      * @return void
      */
-    public function __construct(public \ArrayObject $item)
+    public function __construct(public Onejav $model)
     {
     }
 }

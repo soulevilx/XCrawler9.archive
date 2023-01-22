@@ -4,11 +4,13 @@ namespace Modules\Jav\Crawlers;
 
 use ArrayObject;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
 use JOOservices\XClient\Response\Dom;
 use Modules\Core\Services\CrawlerService;
 use Modules\Jav\Events\OnejavItemParsed;
+use Modules\Jav\Models\Onejav;
 use Symfony\Component\DomCrawler\Crawler;
 
 class OnejavCrawler extends CrawlerService
@@ -34,21 +36,21 @@ class OnejavCrawler extends CrawlerService
 
     public function daily(): Collection
     {
-        $items = collect();
-        $this->getItemsRecursive($items, Carbon::now()->format(self::DEFAULT_DATE_FORMAT));
+        $models = collect();
+        $this->getItemsRecursive($models, Carbon::now()->format(self::DEFAULT_DATE_FORMAT));
 
-        return $items;
+        return $models;
     }
 
     public function search(string $keyword, string $by = 'search')
     {
-        $items = collect();
-        $this->getItemsRecursive($items, $by.'/'.urlencode($keyword));
+        $models = collect();
+        $this->getItemsRecursive($models, $by.'/'.urlencode($keyword));
 
-        return $items;
+        return $models;
     }
 
-    public function getItemsWithPage(Collection &$items, string $url, array $payload = []): int
+    public function getItemsWithPage(Collection &$models, string $url, array $payload = []): int
     {
         $currentPage = !empty($payload['page']) ? $payload['page'] : 1;
         if (empty($payload['page'])) {
@@ -66,7 +68,7 @@ class OnejavCrawler extends CrawlerService
 
         $lastPage = 0 === $pageNode->count() ? 1 : (int) $pageNode->text();
 
-        $items = $items->merge(
+        $models = $models->merge(
             collect($dom->filter('.container .columns')->each(function ($el) {
                 return $this->parse($el);
             }))
@@ -75,7 +77,7 @@ class OnejavCrawler extends CrawlerService
         return $lastPage;
     }
 
-    public function getItemsRecursive(Collection &$items, string $url, array $payload = []): int
+    public function getItemsRecursive(Collection &$models, string $url, array $payload = []): int
     {
         $currentPage = !empty($payload['page']) ? $payload['page'] : 1;
         if (empty($payload['page'])) {
@@ -93,7 +95,7 @@ class OnejavCrawler extends CrawlerService
 
         $lastPage = 0 === $pageNode->count() ? 1 : (int) $pageNode->text();
 
-        $items = $items->merge(
+        $models = $models->merge(
             collect($dom->filter('.container .columns')->each(function ($el) {
                 return $this->parse($el);
             }))
@@ -101,46 +103,46 @@ class OnejavCrawler extends CrawlerService
 
         if (empty($payload) || $payload['page'] < $lastPage) {
             sleep(1);
-            $lastPage = $this->getItemsRecursive($items, $url, ['page' => $currentPage + 1]);
+            $lastPage = $this->getItemsRecursive($models, $url, ['page' => $currentPage + 1]);
         }
 
         return $lastPage;
     }
 
-    private function parse(Crawler $crawler): ArrayObject
+    private function parse(Crawler $crawler): Model
     {
-        $item = new ArrayObject([], ArrayObject::ARRAY_AS_PROPS);
+        $model = app(Onejav::class);
 
         if ($crawler->filter('h5.title a')->count()) {
-            $item->url = trim($crawler->filter('h5.title a')->attr('href'));
+            $model->url = trim($crawler->filter('h5.title a')->attr('href'));
         }
 
         if ($crawler->filter('.columns img.image')->count()) {
-            $item->cover = trim($crawler->filter('.columns img.image')->attr('src'));
+            $model->cover = trim($crawler->filter('.columns img.image')->attr('src'));
         }
 
         if ($crawler->filter('h5 a')->count()) {
-            $item->dvd_id = (trim($crawler->filter('h5 a')->text(null, false)));
-            $item->dvd_id = implode(
+            $model->dvd_id = (trim($crawler->filter('h5 a')->text(null, false)));
+            $model->dvd_id = implode(
                 '-',
-                preg_split('/(,?\\s+)|((?<=[a-z])(?=\\d))|((?<=\\d)(?=[a-z]))/i', $item->dvd_id)
+                preg_split('/(,?\\s+)|((?<=[a-z])(?=\\d))|((?<=\\d)(?=[a-z]))/i', $model->dvd_id)
             );
         }
 
         if ($crawler->filter('h5 span')->count()) {
-            $item->size = trim($crawler->filter('h5 span')->text(null, false));
+            $model->size = trim($crawler->filter('h5 span')->text(null, false));
 
-            if (str_contains($item->size, 'MB')) {
-                $item->size = (float) trim(str_replace('MB', '', $item->size));
-                $item->size /= 1024;
-            } elseif (str_contains($item->size, 'GB')) {
-                $item->size = (float) trim(str_replace('GB', '', $item->size));
+            if (str_contains($model->size, 'MB')) {
+                $model->size = (float) trim(str_replace('MB', '', $model->size));
+                $model->size /= 1024;
+            } elseif (str_contains($model->size, 'GB')) {
+                $model->size = (float) trim(str_replace('GB', '', $model->size));
             }
         }
 
         // Always use href because it'll never change but text will be
-        $item->date = $this->convertStringToDateTime(trim($crawler->filter('.subtitle.is-6 a')->attr('href')));
-        $item->genres = collect($crawler->filter('.tags .tag')->each(
+        $model->date = $this->convertStringToDateTime(trim($crawler->filter('.subtitle.is-6 a')->attr('href')));
+        $model->genres = collect($crawler->filter('.tags .tag')->each(
             function ($genres) {
                 return trim($genres->text(null, false));
             }
@@ -150,10 +152,10 @@ class OnejavCrawler extends CrawlerService
 
         // Description
         $description = $crawler->filter('.level.has-text-grey-dark');
-        $item->description = $description->count() ? trim($description->text(null, false)) : null;
-        $item->description = preg_replace("/\r|\n/", '', $item->description);
+        $model->description = $description->count() ? trim($description->text(null, false)) : null;
+        $model->description = preg_replace("/\r|\n/", '', $model->description);
 
-        $item->performers = collect($crawler->filter('.panel .panel-block')->each(
+        $model->performers = collect($crawler->filter('.panel .panel-block')->each(
             function ($performers) {
                 return trim($performers->text(null, false));
             }
@@ -161,12 +163,12 @@ class OnejavCrawler extends CrawlerService
             return empty($value);
         })->unique()->toArray();
 
-        $item->torrent = trim($crawler->filter('.control.is-expanded a')->attr('href'));
+        $model->torrent = trim($crawler->filter('.control.is-expanded a')->attr('href'));
 
         // Gallery. Only for FC
         $gallery = $crawler->filter('.columns .column a img');
         if ($gallery->count()) {
-            $item->gallery = collect($gallery->each(
+            $model->gallery = collect($gallery->each(
                 function ($image) {
                     return trim($image->attr('src'));
                 }
@@ -175,9 +177,9 @@ class OnejavCrawler extends CrawlerService
             })->unique()->toArray();
         }
 
-        Event::dispatch(new OnejavItemParsed($item));
+        Event::dispatch(new OnejavItemParsed($model));
 
-        return $item;
+        return $model;
     }
 
     private function convertStringToDateTime(string $date): ?Carbon
