@@ -34,14 +34,16 @@ class OnejavServiceTest extends TestCase
         $service = app(OnejavService::class);
         $setting = app(SettingService::class);
         Setting::where('group', 'onejav')->delete();
-        $setting->remember('onejav', 'page', fn() => 10703);
+        $setting->remember('onejav', 'pages', fn() => 10703);
+        $setting->remember('onejav', 'current_page', fn() => 10703);
 
         $items = $service->all();
 
-        $this->assertEquals(1, $setting->get('onejav', 'page'));
+        $this->assertEquals(1, $setting->get('onejav', 'current_page'));
+        $this->assertEquals(10703, $setting->get('onejav', 'pages'));
 
         $service->all();
-        $this->assertEquals(10703, $setting->get('onejav', 'page'));
+        $this->assertEquals(2, $setting->get('onejav', 'current_page'));
         $this->assertDatabaseCount('onejav', $items->count());
     }
 

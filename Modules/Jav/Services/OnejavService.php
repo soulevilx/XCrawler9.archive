@@ -15,16 +15,18 @@ class OnejavService
     public function all(): Collection
     {
         $items = collect();
-        $currentPage = $this->service->remember('onejav', 'page', fn() => 1);
+        $currentPage = $this->service->remember('onejav', 'current_page', fn() => 0);
+        $lastPages = $this->crawler->getItemsWithPage($items, 'new', ['page' => $currentPage + 1]);
 
-        $nextPage = $this->crawler->getItemsWithPage($items, 'new', ['page' => $currentPage]);
-
-        if ($nextPage === $currentPage) {
-            $nextPage = 1;
+        if ($currentPage === $lastPages) {
+            $currentPage = 0;
         }
 
-        $this->service->forget('onejav', 'page');
-        $this->service->remember('onejav', 'page', fn() => $nextPage);
+        $this->service->forget('onejav', 'pages');
+        $this->service->remember('onejav', 'pages', fn() => $lastPages);
+
+        $this->service->forget('onejav', 'current_page');
+        $this->service->remember('onejav', 'current_page', fn() => $currentPage + 1);
 
         return $items;
     }
