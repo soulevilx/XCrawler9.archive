@@ -14,6 +14,7 @@
         "jenssegers/mongodb": "^3.9",
         "jooservices/xclient": "^0.1",
         "laravel/framework": "^9.19",
+        "laravel/horizon": "^5.13",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "nwidart/laravel-modules": "^9.0"
