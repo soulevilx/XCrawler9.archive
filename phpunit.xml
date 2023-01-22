@@ -10,7 +10,6 @@
          convertWarningsToExceptions="true"
          stopOnError="true"
          stopOnFailure="true"
-
 >
     <testsuites>
         <testsuite name="Unit">
