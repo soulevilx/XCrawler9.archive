@@ -17,7 +17,6 @@ class OnejavRepository
     {
         return $this->model->updateOrCreate(
             [
-                'torrent' => $attributes['torrent'],
                 'url' => $attributes['url'],
             ],
             Arr::only($attributes, $this->getColumns())
