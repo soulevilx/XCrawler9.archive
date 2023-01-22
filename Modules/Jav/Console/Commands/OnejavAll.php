@@ -29,6 +29,6 @@ class OnejavAll extends Command implements Isolatable
      */
     public function handle()
     {
-        \Modules\Jav\Jobs\OnejavAll::dispatch();
+        \Modules\Jav\Jobs\OnejavAll::dispatch()->onQueue('jav');
     }
 }
