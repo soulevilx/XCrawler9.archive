@@ -19,3 +19,4 @@ yarn-error.log
 /logfile.txt
 /teamcity.txt
 /coverage.xml
+/.env.testing

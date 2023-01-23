@@ -18,6 +18,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('jav:onejav-all')->everyMinute();
         $schedule->command('jav:onejav-daily')->dailyAt('12:00');
         $schedule->command('jav:onejav-daily')->dailyAt('23:00');
+
+        $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
 
     /**
