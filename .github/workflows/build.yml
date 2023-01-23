@@ -44,7 +44,7 @@ jobs:
     name: Execute UnitTest
     strategy:
       matrix:
-        test: [ Core, Flickr, Jav ]
+        test: [ Unit, Feature, Core, Jav ]
     runs-on:
       - self-hosted
       - ubuntu
