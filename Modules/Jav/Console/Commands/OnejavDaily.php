@@ -29,6 +29,6 @@ class OnejavDaily extends Command implements Isolatable
      */
     public function handle()
     {
-        \Modules\Jav\Jobs\OnejavDaily::dispatch()->onQueue('jav');
+        \Modules\Jav\Jobs\OnejavDaily::dispatch()->onQueue('high');
     }
 }
