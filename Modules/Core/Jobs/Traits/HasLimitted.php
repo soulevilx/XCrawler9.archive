@@ -8,11 +8,16 @@ trait HasLimitted
 {
     public function middleware()
     {
-        if ('testing' === config('app.env')) {
+        if (config('app.env') === 'testing') {
             return [];
         }
 
-        return [new LimitMiddleware(self::class)];
+        return [
+            new LimitMiddleware([
+                self::class,
+                config('app.env'),
+            ])
+        ];
     }
 
     public function retryUntil()
