@@ -2,29 +2,17 @@
 
 namespace Modules\Jav\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Schema;
+use Modules\Core\Repositories\AbstractBaseRepository;
 use Modules\Jav\Models\Onejav;
 
-class OnejavRepository
+class OnejavRepository extends AbstractBaseRepository
 {
     public function __construct(public Onejav $model)
     {
     }
 
-    public function create(array $attributes): Model
+    public function uniqueColumns(): array
     {
-        return $this->model->updateOrCreate(
-            [
-                'url' => $attributes['url'],
-            ],
-            Arr::only($attributes, $this->getColumns())
-        );
-    }
-
-    private function getColumns()
-    {
-        return Schema::getColumnListing($this->model->getTable());
+        return ['url'];
     }
 }

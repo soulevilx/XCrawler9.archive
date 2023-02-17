@@ -13,18 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('onejav', function (Blueprint $table) {
+        Schema::create('performers', function (Blueprint $table) {
             $table->id();
+            $table->uuid()->index();
 
-            $table->string('url')->unique();
-            $table->string('cover')->nullable();
-            $table->string('dvd_id')->nullable()->index();
-            $table->unsignedFloat('size')->nullable();
-            $table->date('date')->nullable();
-            $table->json('genres')->nullable();
-            $table->string('description')->nullable();
-            $table->json('performers')->nullable();
-            $table->string('torrent')->index();
+            $table->string('name')->index();
 
             $table->timestamps();
             $table->softDeletes();
@@ -39,7 +32,7 @@ return new class extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('onejav');
+        Schema::dropIfExists('performers');
         Schema::enableForeignKeyConstraints();
     }
 };

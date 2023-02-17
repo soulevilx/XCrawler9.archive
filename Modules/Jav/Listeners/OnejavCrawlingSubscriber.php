@@ -3,15 +3,14 @@
 namespace Modules\Jav\Listeners;
 
 use Modules\Jav\Events\OnejavItemParsed;
-use Modules\Jav\Repositories\OnejavRepository;
+use Modules\Jav\Services\OnejavService;
 
 class OnejavCrawlingSubscriber
 {
 
     public function onOnejavItemParsed(OnejavItemParsed $event)
     {
-        $repository = app(OnejavRepository::class);
-        $repository->create($event->model->toArray());
+        app(OnejavService::class)->create($event->model->toArray());
     }
 
     /**

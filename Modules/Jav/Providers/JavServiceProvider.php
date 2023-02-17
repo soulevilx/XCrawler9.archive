@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\ServiceProvider;
 use Modules\Jav\Console\Commands\OnejavAll;
 use Modules\Jav\Console\Commands\OnejavDaily;
+use Modules\Jav\Console\Commands\OnejavMigratePerformers;
 
 class JavServiceProvider extends ServiceProvider
 {
@@ -42,7 +43,8 @@ class JavServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
         $this->commands([
             OnejavAll::class,
-            OnejavDaily::class
+            OnejavDaily::class,
+            OnejavMigratePerformers::class,
         ]);
     }
 

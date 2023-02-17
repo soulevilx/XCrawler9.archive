@@ -39,4 +39,14 @@ class Onejav extends Model
     {
         return \Modules\Jav\Database\factories\OnejavFactory::new();
     }
+
+    public function exPerformers()
+    {
+        return $this->belongsToMany(
+            Performers::class,
+            'performer_onejav',
+            'onejav_id',
+            'performer_id'
+        )->withTimestamps();
+    }
 }
