@@ -36,6 +36,11 @@ jobs:
       - name: Lint
         run: composer ${{ matrix.lint }}
 
+      - name: 'Qodana Scan'
+        uses: JetBrains/qodana-action@main
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+
   tests:
     name: Execute UnitTest
     strategy:
