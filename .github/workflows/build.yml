@@ -36,6 +36,13 @@ jobs:
       - name: Lint
         run: composer ${{ matrix.lint }}
 
+  qodana:
+    name: Code standards check
+    runs-on:
+      - ubuntu
+    needs: [ code_standards ]
+
+    steps:
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@main
         env:
@@ -49,7 +56,7 @@ jobs:
     runs-on:
       - self-hosted
       - ubuntu
-    needs: [ code_standards ]
+    needs: [ qodana ]
 
     services:
       mysql:
