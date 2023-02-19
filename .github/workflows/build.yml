@@ -37,7 +37,7 @@ jobs:
         run: composer ${{ matrix.lint }}
 
   qodana:
-    name: Code standards check
+    name: Qodana Scan
     runs-on:
       - ubuntu
     needs: [ code_standards ]
