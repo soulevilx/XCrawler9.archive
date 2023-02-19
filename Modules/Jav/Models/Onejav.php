@@ -4,6 +4,7 @@ namespace Modules\Jav\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Onejav extends Model
 {
@@ -40,13 +41,23 @@ class Onejav extends Model
         return \Modules\Jav\Database\factories\OnejavFactory::new();
     }
 
-    public function exPerformers()
+    public function exPerformers(): BelongsToMany
     {
         return $this->belongsToMany(
             Performers::class,
             'performer_onejav',
             'onejav_id',
             'performer_id'
+        )->withTimestamps();
+    }
+
+    public function exGenres(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Genre::class,
+            'genre_onejav',
+            'onejav_id',
+            'genre_id'
         )->withTimestamps();
     }
 }

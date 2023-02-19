@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\ServiceProvider;
 use Modules\Jav\Console\Commands\OnejavAll;
 use Modules\Jav\Console\Commands\OnejavDaily;
+use Modules\Jav\Console\Commands\OnejavMigrateGenres;
 use Modules\Jav\Console\Commands\OnejavMigratePerformers;
 
 class JavServiceProvider extends ServiceProvider
@@ -45,6 +46,7 @@ class JavServiceProvider extends ServiceProvider
             OnejavAll::class,
             OnejavDaily::class,
             OnejavMigratePerformers::class,
+            OnejavMigrateGenres::class
         ]);
     }
 

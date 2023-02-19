@@ -7,8 +7,10 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
 use Modules\Core\Services\SettingService;
 use Modules\Jav\Crawlers\OnejavCrawler;
+use Modules\Jav\Events\OnejavGenreSynced;
 use Modules\Jav\Events\OnejavItemCreated;
 use Modules\Jav\Events\OnejavPerformerSynced;
+use Modules\Jav\Repositories\GenreRepository;
 use Modules\Jav\Repositories\OnejavRepository;
 use Modules\Jav\Repositories\PerformerRepository;
 
@@ -50,6 +52,7 @@ class OnejavService
         $model = $this->repository->create($attributes);
 
         $this->syncPerformers($model);
+        $this->syncGenres($model);
 
         Event::dispatch(new OnejavItemCreated($model));
 
@@ -65,5 +68,16 @@ class OnejavService
         }
 
         Event::dispatch(new OnejavPerformerSynced($model));
+    }
+
+    public function syncGenres(Model $model): void
+    {
+        $genreRepository = app(GenreRepository::class);
+        foreach ($model->genres as $genre) {
+            $genreModel = $genreRepository->create(['name' => $genre,]);
+            $model->exGenres()->syncWithoutDetaching($genreModel->id);
+        }
+
+        Event::dispatch(new OnejavGenreSynced($model));
     }
 }

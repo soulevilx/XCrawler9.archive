@@ -2,6 +2,7 @@
 
 namespace Modules\Jav\Tests\Unit\Services;
 
+use Illuminate\Support\Facades\Event;
 use JOOservices\XClient\Response\Response;
 use JOOservices\XClient\XClient;
 use Mockery;
@@ -9,11 +10,15 @@ use Mockery\MockInterface;
 use Modules\Core\Models\Setting;
 use Modules\Core\Services\SettingService;
 use Modules\Jav\Crawlers\OnejavCrawler;
+use Modules\Jav\Events\OnejavGenreSynced;
+use Modules\Jav\Events\OnejavPerformerSynced;
+use Modules\Jav\Models\Onejav;
 use Modules\Jav\Services\OnejavService;
 use Tests\TestCase;
 
 class OnejavServiceTest extends TestCase
 {
+
     public function testAll()
     {
         $this->instance(
@@ -73,5 +78,41 @@ class OnejavServiceTest extends TestCase
         $items = app(OnejavService::class)->daily();
         $this->assertCount(29, $items);
         $this->assertDatabaseCount('onejav', $items->count());
+    }
+
+    public function testSynPerformers()
+    {
+        Event::fake([
+            OnejavPerformerSynced::class,
+        ]);
+
+        $onejav = Onejav::factory()->create();
+
+        app(OnejavService::class)->syncPerformers($onejav);
+
+        Event::assertDispatched(OnejavPerformerSynced::class, function ($event) use ($onejav) {
+            return $event->model->id === $onejav->id;
+        });
+
+        $this->assertDatabaseCount('performers', count($onejav->performers));
+        $this->assertDatabaseCount('performer_onejav', count($onejav->performers));
+    }
+
+    public function testSynGenres()
+    {
+        Event::fake([
+            OnejavGenreSynced::class,
+        ]);
+
+        $onejav = Onejav::factory()->create();
+
+        app(OnejavService::class)->syncGenres($onejav);
+
+        Event::assertDispatched(OnejavGenreSynced::class, function ($event) use ($onejav) {
+            return $event->model->id === $onejav->id;
+        });
+
+        $this->assertDatabaseCount('genres', count($onejav->genres));
+        $this->assertDatabaseCount('genre_onejav', count($onejav->genres));
     }
 }
