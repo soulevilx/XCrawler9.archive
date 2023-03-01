@@ -6,8 +6,12 @@ use Illuminate\Support\Facades\Redis;
 
 class LimitMiddleware
 {
-    public function __construct(private array $keys)
-    {
+    public function __construct(
+        private array $keys,
+        private int $block = 1,
+        private int $allow = 1,
+        private int $every = 1,
+    ) {
     }
 
     /**
@@ -30,9 +34,9 @@ class LimitMiddleware
                 )
             )
         )
-            ->block(1)
-            ->allow(1)
-            ->every(1)
+            ->block($this->block)
+            ->allow($this->allow)
+            ->every($this->every)
             ->then(function () use ($job, $next) {
                 $next($job);
             }, function () use ($job) {

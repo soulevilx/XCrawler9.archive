@@ -221,9 +221,38 @@ return [
     'environments' => [
         'production' => [
             'low' => [
+                'connection' => 'redis',
+                'queue' => ['default'],
+                'balance' => 'auto',
+                'maxProcesses' => 40,
+
+                'maxJobs' => 40,
+                'memory' => 4096,
+                'timeout' => 86400,
+                'nice' => 0,
+            ],
+            'normal' => [
+                'connection' => 'redis',
+                'queue' => ['normal'],
+                'balance' => 'auto',
                 'maxProcesses' => 10,
-                'balanceMaxShift' => 1,
-                'balanceCooldown' => 3,
+
+                'maxJobs' => 10,
+                'memory' => 1024,
+
+                'timeout' => 86400,
+                'nice' => 0,
+            ],
+            'high' => [
+                'connection' => 'redis',
+                'queue' => ['high'],
+                'balance' => 'auto',
+                'maxProcesses' => 10,
+
+                'maxJobs' => 10,
+                'memory' => 1024,
+                'timeout' => 86400,
+                'nice' => 0,
             ],
         ],
 

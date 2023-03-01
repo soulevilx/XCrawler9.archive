@@ -13,10 +13,15 @@ trait HasLimitted
         }
 
         return [
-            new LimitMiddleware([
-                self::class,
-                config('app.env'),
-            ])
+            new LimitMiddleware(
+                [
+                    self::class,
+                    config('app.env'),
+                ],
+                $this->block ?? 1,
+                $this->allow ?? 1,
+                $this->every ?? 1,
+            )
         ];
     }
 
