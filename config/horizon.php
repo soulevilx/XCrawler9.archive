@@ -184,11 +184,11 @@ return [
             'connection' => 'redis',
             'queue' => ['default'],
             'balance' => 'auto',
-            'maxProcesses' => 1,
+            'maxProcesses' => 40,
             'maxTime' => 0,
-            'maxJobs' => 0,
-            'memory' => 128,
-            'tries' => 2,
+            'maxJobs' => 40,
+            'memory' => 4096,
+            'tries' => 3,
             'timeout' => 86400,
             'nice' => 0,
         ],
@@ -196,11 +196,11 @@ return [
             'connection' => 'redis',
             'queue' => ['normal'],
             'balance' => 'auto',
-            'maxProcesses' => 1,
+            'maxProcesses' => 20,
             'maxTime' => 0,
-            'maxJobs' => 0,
-            'memory' => 128,
-            'tries' => 2,
+            'maxJobs' => 20,
+            'memory' => 2048,
+            'tries' => 3,
             'timeout' => 86400,
             'nice' => 0,
         ],
@@ -208,11 +208,11 @@ return [
             'connection' => 'redis',
             'queue' => ['high'],
             'balance' => 'auto',
-            'maxProcesses' => 1,
+            'maxProcesses' => 10,
             'maxTime' => 0,
-            'maxJobs' => 0,
-            'memory' => 128,
-            'tries' => 2,
+            'maxJobs' => 10,
+            'memory' => 1024,
+            'tries' => 3,
             'timeout' => 86400,
             'nice' => 0,
         ],
@@ -220,44 +220,16 @@ return [
 
     'environments' => [
         'production' => [
-            'low' => [
-                'connection' => 'redis',
-                'queue' => ['default'],
-                'balance' => 'auto',
-                'maxProcesses' => 40,
-
-                'maxJobs' => 40,
-                'memory' => 4096,
-                'timeout' => 86400,
-                'nice' => 0,
-            ],
-            'normal' => [
-                'connection' => 'redis',
-                'queue' => ['normal'],
-                'balance' => 'auto',
-                'maxProcesses' => 10,
-
-                'maxJobs' => 10,
-                'memory' => 1024,
-
-                'timeout' => 86400,
-                'nice' => 0,
-            ],
-            'high' => [
-                'connection' => 'redis',
-                'queue' => ['high'],
-                'balance' => 'auto',
-                'maxProcesses' => 10,
-
-                'maxJobs' => 10,
-                'memory' => 1024,
-                'timeout' => 86400,
-                'nice' => 0,
-            ],
         ],
 
         'local' => [
             'low' => [
+                'maxProcesses' => 3,
+            ],
+            'normal' => [
+                'maxProcesses' => 3,
+            ],
+            'high' => [
                 'maxProcesses' => 3,
             ],
         ],

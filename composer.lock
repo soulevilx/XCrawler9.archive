@@ -1240,16 +1240,16 @@
         },
         {
             "name": "jooservices/xclient",
-            "version": "0.1.4",
+            "version": "0.1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jooservices/XClient.git",
-                "reference": "b4fcdcbd61b64b3ae9ff5a4fdc3ecb1ef2852c50"
+                "reference": "2686f93638455dab0c9957c17d547b699b6df321"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jooservices/XClient/zipball/b4fcdcbd61b64b3ae9ff5a4fdc3ecb1ef2852c50",
-                "reference": "b4fcdcbd61b64b3ae9ff5a4fdc3ecb1ef2852c50",
+                "url": "https://api.github.com/repos/jooservices/XClient/zipball/2686f93638455dab0c9957c17d547b699b6df321",
+                "reference": "2686f93638455dab0c9957c17d547b699b6df321",
                 "shasum": ""
             },
             "require": {
@@ -1287,9 +1287,9 @@
             "description": "Wrapper for Guzzle HTTP Client",
             "support": {
                 "issues": "https://github.com/jooservices/XClient/issues",
-                "source": "https://github.com/jooservices/XClient/tree/0.1.4"
+                "source": "https://github.com/jooservices/XClient/tree/0.1.4.2"
             },
-            "time": "2023-03-01T09:06:00+00:00"
+            "time": "2023-03-01T09:25:53+00:00"
         },
         {
             "name": "laravel/framework",
