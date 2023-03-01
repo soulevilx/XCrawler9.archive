@@ -122,6 +122,7 @@ return [
     */
 
     'key' => env('APP_KEY'),
+    'server_id' => env('SERVER_ID',1),
 
     'cipher' => 'AES-256-CBC',
 

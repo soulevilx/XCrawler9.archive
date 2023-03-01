@@ -29,7 +29,7 @@ class LimitMiddleware
                     [
                         config('app.key'),
                         $this->keys,
-                        config('app.server_ip'),
+                        config('app.server_id'),
                     ]
                 )
             )
