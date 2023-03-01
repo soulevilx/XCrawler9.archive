@@ -29,7 +29,7 @@ class OnejavService
         $currentPage = $this->service->remember('onejav', 'current_page', fn() => 0);
         $lastPages = $this->crawler->getItemsWithPage($items, 'new', ['page' => $currentPage + 1]);
 
-        if ($currentPage === $lastPages) {
+        if ($currentPage === $lastPages || $currentPage > $lastPages) {
             $currentPage = 0;
         }
 
