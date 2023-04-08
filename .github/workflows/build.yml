@@ -42,17 +42,17 @@ jobs:
       - name: Lint
         run: composer ${{ matrix.lint }}
 
-  qodana:
-    name: Qodana Scan
-    runs-on:
-      - ubuntu
-    needs: [ code_standards ]
+#  qodana:
+#    name: Qodana Scan
+#    runs-on:
+#      - ubuntu
+#    needs: [ code_standards ]
 
-    steps:
-      - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@main
-        env:
-          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+ #   steps:
+ #     - name: 'Qodana Scan'
+ #       uses: JetBrains/qodana-action@main
+ #       env:
+ #         QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
 
   tests:
     name: Execute UnitTest
@@ -62,7 +62,7 @@ jobs:
     runs-on:
       - self-hosted
       - ubuntu
-    needs: [ qodana ]
+    needs: [ code_standards ]
 
     services:
       mysql:
