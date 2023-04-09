@@ -67,6 +67,12 @@
         ],
         "phpmd": [
             "@php vendor/bin/phpmd app github phpmd.xml"
+        ],
+        "test" : [
+            "@php vendor/bin/phpunit --testsuite=Unit",
+            "@php vendor/bin/phpunit --testsuite=Feature",
+            "@php vendor/bin/phpunit --testsuite=Core",
+            "@php vendor/bin/phpunit --testsuite=Jav"
         ]
     },
     "extra": {

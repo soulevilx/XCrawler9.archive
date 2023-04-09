@@ -55,38 +55,11 @@ jobs:
  #         QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
 
   tests:
-    name: Execute UnitTest
-    strategy:
-      matrix:
-        test: [ Unit, Feature, Core, Jav ]
+    name: Execute UnitTests and FeatureTests
     runs-on:
       - self-hosted
       - ubuntu
     needs: [ code_standards ]
-
-    services:
-      mysql:
-        image: mariadb:latest
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: xcrawler
-        ports:
-          - 3306:3306
-
-      redis:
-        image: redis
-        ports:
-          - 6379:6379
-
-      mongo:
-        image: mongo:bionic
-        options: >-
-          --health-cmd mongo
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 27017:27017
 
     steps:
       - uses: actions/checkout@v3
@@ -113,14 +86,14 @@ jobs:
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         if: success()
         run: |
-          ./vendor/bin/phpunit --testsuite=${{ matrix.test }} --coverage-clover coverage-${{ matrix.test }}.xml
+          composer test
 
       - name: Coverage
         uses: actions/upload-artifact@v3
         if: success()
         with:
           name: coverage-reports
-          path: coverage-${{ matrix.test }}.xml
+          path: coverage-tests.xml
 
   test_finished:
     name: Test Finished
