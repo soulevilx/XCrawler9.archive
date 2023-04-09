@@ -69,10 +69,7 @@
             "@php vendor/bin/phpmd app github phpmd.xml"
         ],
         "test" : [
-            "@php vendor/bin/phpunit --testsuite=Unit",
-            "@php vendor/bin/phpunit --testsuite=Feature",
-            "@php vendor/bin/phpunit --testsuite=Core",
-            "@php vendor/bin/phpunit --testsuite=Jav"
+            "@php vendor/bin/phpunit --coverage-clover coverage-tests.xml --testsuite=Unit,Feature,Core,Jav"
         ]
     },
     "extra": {
